@@ -44,6 +44,7 @@ public class InitObject {
                 throw new BadSortPaginator("Bad request: SortPaginator");
             }
             if (params.containsKey("search")) {
+                @SuppressWarnings("unchecked")
                 Map<String, String> map = (Map<String, String>) params.get("search");
                 if (!map.isEmpty()) {
                     search.setParameters(new HashMap<String, String>(map));
@@ -65,5 +66,11 @@ public class InitObject {
         setBase(toObject, paginator, sortPaginator, customDto, search);        
 
         return toObject;
+    }
+
+    public static <T extends Base> CustomDto toCustomDto(T toObject) {
+        //toObject.getCustomDto().set
+
+        return toObject.getCustomDto();
     }
 }
