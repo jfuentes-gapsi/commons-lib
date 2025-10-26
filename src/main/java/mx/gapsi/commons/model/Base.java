@@ -13,6 +13,7 @@ import mx.gapsi.commons.dto.CustomDto;
 public class Base {
     private CustomDto customDto;
     private SortPaginator sortPaginator;
+    private Object data;
     private Search search;
     private Boolean successfully;
 }

@@ -3,6 +3,7 @@ package mx.gapsi.commons.utils;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
@@ -68,8 +69,21 @@ public class InitObject {
         return toObject;
     }
 
-    public static <T extends Base> CustomDto toCustomDto(T toObject) {
-        //toObject.getCustomDto().set
+    public static <T extends Base> CustomDto toCustomDto(T toObject, int totalRows) {
+        int rowsPerPage = 0;
+        int currentPage = 0;
+        int totalPages = 0;
+        if(!Objects.isNull(toObject.getSortPaginator())) {
+            SortPaginator sortPaginator = toObject.getSortPaginator();
+            if (sortPaginator.getRows() > 0 && sortPaginator.getPage() > 0) {
+			    rowsPerPage = sortPaginator.getRows();
+			    currentPage = sortPaginator.getPage();
+			    totalPages = (int) Math.ceil((double) totalRows / rowsPerPage);
+            }
+        }
+        toObject.getCustomDto().getPaginator().setCurrentPage(currentPage);
+        toObject.getCustomDto().getPaginator().setPages(totalPages);
+        toObject.getCustomDto().getPaginator().setTotalRows(totalRows);
 
         return toObject.getCustomDto();
     }

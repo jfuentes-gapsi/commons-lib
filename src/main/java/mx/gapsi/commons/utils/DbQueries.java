@@ -3,9 +3,13 @@ package mx.gapsi.commons.utils;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import mx.gapsi.commons.model.Base;
 import mx.gapsi.commons.model.SortPaginator;
@@ -88,6 +92,20 @@ public class DbQueries {
         }
 
         return ps;
+    }
+
+    public static int getTotalRows(String baseQuery, HashMap<String, String> params, JdbcTemplate jdbcTemplate) {
+        if (!Objects.isNull(params) && !params.isEmpty()) {
+            params.remove("searchType");
+            int index = baseQuery.toUpperCase().indexOf("FROM");
+            String query = "SELECT COUNT(*) " + baseQuery.substring(index);
+            Collection<String> valuesCollection = params.values();
+            Object[] values = valuesCollection.toArray(new Object[0]);
+
+            return jdbcTemplate.queryForObject(query, Integer.class, values);
+        } else {
+            return 0;
+        }
     }
     
 }

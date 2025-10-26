@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class Paginator {
     private int pages;
     private int totalRows;
-    private int currentRow;
+    private int currentPage;
 }

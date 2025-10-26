@@ -2,7 +2,6 @@ package mx.gapsi.commons.dto;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,8 +16,6 @@ import mx.gapsi.commons.model.Paginator;
 public class CustomDto {
     private int code;
     private String description;
-    @JsonIgnore
-    private Object object;
-	private List<Object> objects;
+	private List<Object> data;
     private Paginator paginator;
 }
