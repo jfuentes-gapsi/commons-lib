@@ -1,5 +1,6 @@
 package mx.gapsi.commons.model;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +17,5 @@ public class Base {
     private Object data;
     private Search search;
     private Boolean successfully;
+    private List<String> items;
 }

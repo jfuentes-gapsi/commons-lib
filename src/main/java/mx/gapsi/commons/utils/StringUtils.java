@@ -1,7 +1,11 @@
 package mx.gapsi.commons.utils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class StringUtils {
     
@@ -24,5 +28,17 @@ public class StringUtils {
 	public static String camelCaseToSnakeCase(String text) {
         return text.replaceAll("([A-Z]+)([A-Z][a-z])", "$1_$2").replaceAll("([a-z])([A-Z])", "$1_$2");
     }
+
+	public static List<String> itemsToList (String items) {
+		List<String> itemList;
+		if (!Objects.isNull(items) && !items.isEmpty()) {
+			itemList = new ArrayList<>(Arrays.asList(items.split(",")));
+		} else {
+			itemList = new ArrayList<>();
+			return itemList;
+		}
+		
+		return itemList;
+	}
     
 }

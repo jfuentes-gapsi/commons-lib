@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -105,6 +106,18 @@ public class DbQueries {
         } else {
             return 0;
         }
+    }
+
+    public static String buildQueryIn(String baseQuery, List<String> items, String fieldId) {
+       StringBuilder query = new StringBuilder(" ");
+        if (!items.isEmpty()){
+            query.append(baseQuery + " WHERE " + fieldId + " IN (");
+            items.forEach(item -> query.append(item + ", "));
+            query.setLength(query.length() - 2);
+            query.append(")");
+        }
+
+        return query.toString();
     }
     
 }
